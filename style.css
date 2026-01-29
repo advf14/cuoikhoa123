@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+header {
+    background: #020617;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #38bdf8;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+.banner {
+    background: url("https://www.freepik.com/free-photos-vectors/shop-banner") center/cover;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px black;
+}
+
+.products {
+    padding: 30px;
+}
+
+.products h2 {
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.item {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.item img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.item button {
+    background: #38bdf8;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.item button:hover {
+    background: #0ea5e9;
+}
+
+footer {
+    background: #020617;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+}

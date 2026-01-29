@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Sản Phẩm - Shop Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-section {
+      background: #1e293b;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .filter-section h3 {
+      color: #38bdf8;
+      margin-top: 0;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .filter-group select {
+      padding: 8px 15px;
+      background: #0f172a;
+      color: white;
+      border: 1px solid #38bdf8;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .filter-group select:hover {
+      border-color: #0ea5e9;
+    }
+
+    .products-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .products-grid h2 {
+      color: #38bdf8;
+      margin-bottom: 30px;
+    }
+
+    .product-count {
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .item {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .item img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .item h3 {
+      color: #e2e8f0;
+      margin: 10px 0;
+    }
+
+    .item-category {
+      color: #38bdf8;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item-price {
+      color: #10b981;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .item button {
+      background: #38bdf8;
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .item button:hover {
+      background: #0ea5e9;
+    }
+
+    .item .heart-btn {
+      background: #475569;
+      padding: 8px 15px;
+      width: 100%;
+    }
+
+    .item .heart-btn:hover {
+      background: #64748b;
+    }
+
+    .pagination {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .pagination a,
+    .pagination span {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 0 4px;
+      background: #1e293b;
+      color: #38bdf8;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination a:hover {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .pagination .active {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shop Game</h1>
+    <nav>
+      <a href="index.html">Trang Chủ</a>
+      <a href="sim.html">Sản Phẩm</a>
+      <a href="lienhe.html">Liên Hệ</a>
+      <a href="naptien.html">Nạp Tiền</a>
+    </nav>
+  </header>
+
+  <div class="banner">
+    Kho Game Tuyệt Vời
+  </div>
+
+  <div class="filter-section">
+    <h3> Bộ Lọc</h3>
+    <div class="filter-group">
+      <select id="categoryFilter">
+        <option value="">Tất Cả Danh Mục</option>
+        <option value="adventure">Phiêu Lưu</option>
+        <option value="action">Hành Động</option>
+        <option value="strategy">Chiến Thuật</option>
+        <option value="sports">Thể Thao</option>
+      </select>
+
+      <select id="priceFilter">
+        <option value="">Tất Cả Giá</option>
+        <option value="low">Dưới 500,000 VND</option>
+        <option value="medium">500,000 - 700,000 VND</option>
+        <option value="high">Trên 700,000 VND</option>
+      </select>
+
+      <select id="sortFilter">
+        <option value="">Sắp Xếp Theo</option>
+        <option value="newest">Mới Nhất</option>
+        <option value="price-low">Giá Thấp Đến Cao</option>
+        <option value="price-high">Giá Cao Đến Thấp</option>
+        <option value="popular">Phổ Biến</option>
+      </select>
+    </div>
+  </div>
+
+  <section class="products-grid">
+    <h2>Danh Sách Sản Phẩm</h2>
+    <div class="product-count">Tìm thấy 12 sản phẩm</div>
+
+    <div class="list">
+      <div class="item">
+        <div class="item-category">Phiêu Lưu</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 1">
+        <h3>Game Phiêu Lưu 1</h3>
+        <div class="item-price">500,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Hành Động</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 2">
+        <h3>Game Hành Động 1</h3>
+        <div class="item-price">600,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Chiến Thuật</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 3">
+        <h3>Game Chiến Thuật 1</h3>
+        <div class="item-price">450,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Thể Thao</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 4">
+        <h3>Game Thể Thao 1</h3>
+        <div class="item-price">550,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Phiêu Lưu</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 5">
+        <h3>Game Phiêu Lưu 2</h3>
+        <div class="item-price">520,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Hành Động</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 6">
+        <h3>Game Hành Động 2</h3>
+        <div class="item-price">650,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Chiến Thuật</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 7">
+        <h3>Game Chiến Thuật 2</h3>
+        <div class="item-price">480,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Thể Thao</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 8">
+        <h3>Game Thể Thao 2</h3>
+        <div class="item-price">580,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Phiêu Lưu</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 9">
+        <h3>Game Phiêu Lưu 3</h3>
+        <div class="item-price">540,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Hành Động</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 10">
+        <h3>Game Hành Động 3</h3>
+        <div class="item-price">670,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Chiến Thuật</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 11">
+        <h3>Game Chiến Thuật 3</h3>
+        <div class="item-price">500,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+
+      <div class="item">
+        <div class="item-category">Thể Thao</div>
+        <img src="https://via.placeholder.com/200x150" alt="Game 12">
+        <h3>Game Thể Thao 3</h3>
+        <div class="item-price">600,000 VND</div>
+        <button>Mua Ngay</button>
+        <button class="heart-btn"> Yêu Thích</button>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <span class="active">1</span>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">Tiếp →</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2300 Shop Game. All rights reserved.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.heart-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (this.style.color === 'red') {
+          this.style.color = 'white';
+          this.textContent = ' Yêu Thích';
+        } else {
+          this.style.color = 'red';
+          this.textContent = ' Yêu Thích';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

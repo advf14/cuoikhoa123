@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Liên Hệ - Shop Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-section {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 8px;
+    }
+
+    .contact-section h2 {
+      color: #38bdf8;
+      margin-top: 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #38bdf8;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #38bdf8;
+      border-radius: 5px;
+      background: #0f172a;
+      color: white;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #0ea5e9;
+      box-shadow: 0 0 5px #38bdf8;
+    }
+
+    .submit-btn {
+      background: #38bdf8;
+      border: none;
+      padding: 12px 30px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #0ea5e9;
+    }
+
+    .contact-info {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .info-item {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .info-item h3 {
+      color: #38bdf8;
+      margin-top: 0;
+    }
+
+    .info-item p {
+      margin: 10px 0;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .back-link a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      color: #0ea5e9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shop Game</h1>
+    <nav>
+      <a href="index.html">Trang Chủ</a>
+      <a href="sim.html">Sản Phẩm</a>
+      <a href="lienhe.html">Liên Hệ</a>
+  </header>
+
+  <section class="contact-section">
+    <h2>Liên Hệ Với Chúng Tôi</h2>
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="name">Họ và Tên *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Số Điện Thoại *</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Chủ Đề *</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Nội Dung *</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Gửi Liên Hệ</button>
+    </form>
+  </section>
+
+  <section class="contact-info">
+    <div class="info-item">
+      <h3>Địa Chỉ</h3>
+      <p>123 Đường ABC</p>
+      <p>Quận 1, TP.HCM</p>
+      <p>Việt Nam</p>
+    </div>
+
+    <div class="info-item">
+      <h3>Liên Hệ</h3>
+      <p>Điện Thoại: (028) 1234 5678</p>
+      <p>Email: shop@game.com</p>
+      <p>Zalo: 0901 234 567</p>
+    </div>
+
+    <div class="info-item">
+      <h3> Giờ Làm Việc</h3>
+      <p>Thứ 2 - Thứ 6: 08:00 - 18:00</p>
+      <p>Thứ 7: 09:00 - 17:00</p>
+      <p>Chủ Nhật: Nghỉ</p>
+    </div>
+
+    <div class="info-item">
+      <h3>Mạng Xã Hội</h3>
+      <p><a href="#" style="color: #38bdf8; text-decoration: none;">Facebook</a></p>
+      <p><a href="#" style="color: #38bdf8; text-decoration: none;">Instagram</a></p>
+      <p><a href="#" style="color: #38bdf8; text-decoration: none;">TikTok</a></p>
+    </div>
+  </section>
+
+  <div class="back-link">
+    <a href="index.html">← Quay lại Trang Chủ</a>
+  </div>
+
+  <footer>
+    &copy; 2300 Shop Game. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      alert('Cảm ơn ' + name + ' đã liên hệ với chúng tôi! Chúng tôi sẽ phản hồi trong 24 giờ.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp Tiền - Shop Game</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; }
+        header { background: #1e293b; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #38bdf8; }
+        header h1 { margin: 0; font-size: 24px; color: #38bdf8; }
+        nav a { color: #f8fafc; margin-left: 20px; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: #38bdf8; }
+        
+        .banner { background: linear-gradient(90deg, #0ea5e9, #38bdf8); color: white; text-align: center; padding: 30px; font-size: 22px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .recharge-section { max-width: 500px; margin: 40px auto; background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .recharge-section h2 { color: #38bdf8; margin-top: 0; text-align: center; margin-bottom: 25px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #94a3b8; font-weight: bold; font-size: 14px; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #334155; border-radius: 6px; background: #0f172a; color: white; box-sizing: border-box; font-size: 16px; outline: none; }
+        .form-group input:focus { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
+        
+        .submit-btn { background: #38bdf8; border: none; padding: 14px; color: white; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; }
+        .submit-btn:hover { background: #0ea5e9; transform: translateY(-2px); }
+
+        /* MODAL HIỂN THỊ QR */
+        #qrModal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
+        .modal-content { background: #1e293b; margin: 5vh auto; padding: 25px; width: 90%; max-width: 400px; border-radius: 15px; text-align: center; border: 1px solid #38bdf8; position: relative; }
+        .qr-img { width: 100%; max-width: 250px; margin: 15px 0; border: 5px solid white; border-radius: 10px; }
+        
+        .copy-box { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px dashed #38bdf8; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        #qrDesc { color: #facc15; font-family: monospace; font-size: 18px; }
+        .copy-btn { background: #38bdf8; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        
+        .close-btn { background: #ef4444; border: none; color: white; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin-top: 20px; width: 100%; font-weight: bold; }
+        
+        footer { text-align: center; padding: 30px; color: #64748b; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Shop Game</h1>
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="sim.html">Sản Phẩm</a>
+        <a href="lienhe.html">Liên Hệ</a>
+        <a href="naptien.html">Nạp Tiền</a>
+    </nav>
+</header>
+
+<div class="banner">Nạp Tiền Vào Tài Khoản</div>
+
+<section class="recharge-section">
+    <h2>Thông Tin Nạp Tiền</h2>
+    <form id="rechargeForm">
+        <div class="form-group">
+            <label>Số Tiền Cần Nạp (VND):</label>
+            <input type="number" id="amount" placeholder="Nhập số tiền (VD: 50000)" required min="10000">
+        </div>
+        <div class="form-group">
+            <label>Tên Đăng Nhập Hệ Thống:</label>
+            <input type="text" id="username" placeholder="Nhập tên tài khoản game" required>
+        </div>
+        <div class="form-group">
+            <label>Phương thức thanh toán:</label>
+            <select id="method" required>
+                <option value="bank">Chuyển khoản VietQR (Tự động)</option>
+                <option value="momo" disabled>MoMo (Đang bảo trì)</option>
+            </select>
+        </div>
+        <button type="submit" class="submit-btn">TẠO MÃ THANH TOÁN</button>
+    </form>
+</section>
+<div id="qrModal">
+    <div class="modal-content">
+        <h3 style="margin: 0; color: #38bdf8;">QUÉT MÃ ĐỂ NẠP</h3>
+        <p id="qrInfo" style="font-size: 14px; color: #cbd5e1; margin: 10px 0;"></p>
+        
+        <img src="" id="qrImage" class="qr-img">
+        
+        <div class="copy-box">
+            <span id="qrDesc"></span>
+            <button class="copy-btn" onclick="copyContent()">Copy</button>
+        </div>
+        
+        <p style="font-size: 12px; color: #94a3b8; margin-top: 15px;">
+        </p>
+        <button class="close-btn" onclick="closeModal()">ĐÓNG</button>
+    </div>
+</div>
+<script>
+function generateVietQR(amount, description) {
+    const BANK_ID = "mb";
+    const ACCOUNT_NO = "929286688999";
+    const ACCOUNT_NAME = "HOANG MANH DUNG";
+    const TEMPLATE = "compact2";
+
+    return `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png`
+        + `?amount=${amount}`
+        + `&addInfo=${encodeURIComponent(description)}`
+        + `&accountName=${encodeURIComponent(ACCOUNT_NAME)}`;
+}
+
+document.getElementById('rechargeForm').onsubmit = function(e) {
+    e.preventDefault();
+    const amount = document.getElementById('amount').value;
+    const username = document.getElementById('username').value;
+    const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const description = `NAP ${username.toUpperCase()} ${randomSuffix}`;
+    document.getElementById('qrImage').src = generateVietQR(amount, description);
+    document.getElementById('qrDesc').innerText = description;
+    document.getElementById('qrInfo').innerHTML = `Đang nạp: <b style="color:#38bdf8">${Number(amount).toLocaleString()}đ</b>`;
+    
+    document.getElementById('qrModal').style.display = 'block';
+};
+
+function closeModal() {
+    document.getElementById('qrModal').style.display = 'none';
+}
+
+function copyContent() {
+    const content = document.getElementById('qrDesc').innerText;
+    navigator.clipboard.writeText(content).then(() => {
+        alert("Đã copy nội dung: " + content);
+    });
+}
+window.onclick = function(event) {
+    if (event.target == document.getElementById('qrModal')) {
+        closeModal();
+    }
+}
+</script>
+
+<footer>
+    &copy; 2024 Shop Game - Hoang Quoc Thien. All rights reserved.
+</footer>
+
+</body>
+</html>
